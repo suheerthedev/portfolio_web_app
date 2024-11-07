@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:portfolio_web_app/home/home_viewmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -241,81 +242,39 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Education / Experience',
+                'Education',
                 style: GoogleFonts.poppins(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.grey[900],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Flutter Development at SMIT',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'May 2024 - Present, Karachi',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      'Currently learning Flutter App Development Application at SMIT. SMIT is an institute with well-trained instructors who have industry experience.',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
+              _buildEducationTile(
+                'Flutter Development',
+                'May 2024 - Present, Saylani Mass IT Training Program',
+                'Currently learning Flutter App Development Application at SMIT. SMIT is an institute with well-trained instructors who have industry experience.',
+              ),
+              _buildEducationTile(
+                'Bachelor of Science in Computer Science',
+                '2024 - 2028, Mohammad Ali Jinnah University',
+                'I am currently pursuing a Bachelor’s degree in Computer Science at Mohammad Ali Jinnah University. This program is helping me build a strong foundation in programming, data structures, and software development.',
+              ),
+              _buildEducationTile(
+                'Intermediate in Computer Science',
+                '2023, Government For Men College',
+                'I completed my Intermediate in Computer Science in 2023 from Government For Men College.',
+              ),
+              _buildEducationTile(
+                'Matriculation in of Computer Science',
+                '2021, Little Folkr’s Paradise School',
+                'I completed my Matriculation in Computer Science in 2021 at Little Folkr’s Paradise School, building a foundation in technology and computer science.',
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildEducationItem({
-    required String title,
-    required String subtitle,
-    required String description,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          subtitle,
-          style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[400]),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          description,
-          style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey[400]),
-        ),
-        const SizedBox(height: 20),
-      ],
     );
   }
 
@@ -365,9 +324,11 @@ class HomeView extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) {
     return Container(
+      width: double.infinity, // Ensures full-width
       color: Colors.black,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'Connect with me',
@@ -377,32 +338,43 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 20,
             children: [
               IconButton(
-                icon: Icon(Icons.linked_camera, color: Colors.white),
+                icon: const FaIcon(FontAwesomeIcons.linkedinIn,
+                    color: Colors.white),
+                iconSize: 24,
                 onPressed: () =>
-                    _launchURL('https://linkedin.com/in/yourprofile'),
+                    _launchURL('https://linkedin.com/in/suheer-khan/'),
               ),
               IconButton(
-                icon: Icon(Icons.photo_camera, color: Colors.white),
+                icon: const FaIcon(FontAwesomeIcons.instagram,
+                    color: Colors.white),
+                iconSize: 24,
                 onPressed: () =>
-                    _launchURL('https://instagram.com/yourprofile'),
+                    _launchURL('https://instagram.com/suheer.khan/'),
               ),
               IconButton(
-                icon: Icon(Icons.camera, color: Colors.white),
-                onPressed: () => _launchURL('https://facebook.com/yourprofile'),
+                icon: const FaIcon(FontAwesomeIcons.facebook,
+                    color: Colors.white),
+                iconSize: 24,
+                onPressed: () =>
+                    _launchURL('https://facebook.com/sk.suheerkhan/'),
               ),
               IconButton(
-                icon: Icon(Icons.security, color: Colors.white),
-                onPressed: () => _launchURL('https://github.com/yourprofile'),
+                icon:
+                    const FaIcon(FontAwesomeIcons.github, color: Colors.white),
+                iconSize: 24,
+                onPressed: () => _launchURL('https://github.com/suheerthedev/'),
               ),
             ],
           ),
           const SizedBox(height: 20),
           Text(
-            '© 2024 Suheer Khan. All rights reserved.',
+            'Made with ❤ by Suheer',
+            textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.grey[600],
@@ -459,4 +431,44 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildEducationTile(String title, String subtitle, String description) {
+  return Container(
+    padding: const EdgeInsets.all(20),
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    decoration: BoxDecoration(
+      color: Colors.grey[900],
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          subtitle,
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            color: Colors.grey[400],
+          ),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          description,
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            color: Colors.grey[400],
+          ),
+        ),
+      ],
+    ),
+  );
 }
